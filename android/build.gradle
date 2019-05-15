@@ -1,10 +1,60 @@
 
 buildscript {
     repositories {
+        google()
+        jcenter()
+        maven { url "https://maven.google.com" }
+        maven { url "https://jitpack.io" }
+        flatDir {
+            dirs 'src/main/libs'
+        }
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.2'
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.3'
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+    flatDir {
+        dirs 'src/main/libs'
+    }
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+dependencies {
+    compile (name:'TapTargetView-1.12.0', ext:'aar')
+    compile 'com.facebook.react:react-native:+'
+}
+
+buildscript {
+    repositories {
         jcenter()
         maven { url 'https://jitpack.io' }
         flatDir {
-            dirs './'
+            dirs 'src/main/libs'
         }
     }
 
@@ -31,10 +81,12 @@ android {
 }
 
 repositories {
-    mavenCentral()
-    maven { url 'https://jitpack.io' }
+    google()
+    jcenter()
+    maven { url "https://maven.google.com" }
+    maven { url "https://jitpack.io" }
     flatDir {
-        dirs './'
+        dirs 'libs'
     }
 }
 
@@ -43,6 +95,6 @@ configurations.all {
 }
 
 dependencies {
+    compile (name:'TapTargetView-1.12.0', ext:'aar')
     compile 'com.facebook.react:react-native:+'
-    compile (name:'./TapTargetView-1.12.0', ext:'aar')
 }
