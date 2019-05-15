@@ -3,6 +3,9 @@ buildscript {
     repositories {
         jcenter()
         maven { url 'https://jitpack.io' }
+        flatDir {
+            dirs './'
+        }
     }
 
     dependencies {
@@ -30,6 +33,9 @@ android {
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
+    flatDir {
+        dirs './'
+    }
 }
 
 configurations.all {
