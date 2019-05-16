@@ -116,7 +116,7 @@ RCT_EXPORT_METHOD(ShowFor:(nonnull NSNumber *)view props:(NSDictionary *)props)
 
     MaterialShowcase *materialShowcase = [[MaterialShowcase alloc] init];
 UIView *target = [self.bridge.uiManager viewForReactTag: view];
-
+CGRect viewRect = target.frame;
 NSString *title = [props objectForKey: @"title"];
 NSString *description = [props objectForKey: @"description"];
 
@@ -244,6 +244,38 @@ if (aniRippleScaleValue > 0) {
 
 [materialShowcase setTargetViewWithView: target];
 [materialShowcase setDelegate: (id)self];
+
+
+
+// set rectangle target property
+if ([[props objectForKey:@"isRect"] boolValue]) {
+    NSString *rectHighLightColorValue = [props objectForKey:@"rectHighLightColor"];
+if (rectHighLightColorValue != nil && targets != nil && targets.count > 0) {
+// save target original color for reversing
+targetOriginalColor = target.backgroundColor;
+
+    // set target background color
+UIColor *targetHighLightColor = [self colorWithHexString:rectHighLightColorValue];
+if (targetHighLightColor != nil) {
+[target setBackgroundColor: targetHighLightColor];
+}
+}
+// we should remove circle
+[materialShowcase setTargetHolderRadius: 0];
+}
+else {
+    targetOriginalColor = nil;
+}
+
+    // set target transparent
+if ([[props objectForKey:@"transparentTarget"] boolValue]) {
+[materialShowcase setTargetTransparent: true];
+}
+
+[materialShowcase setTargetViewWithView: target];
+
+[materialShowcase setDelegate: self];
+
 
 return materialShowcase;
 }
