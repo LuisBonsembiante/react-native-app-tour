@@ -37,7 +37,6 @@ class AppTour {
       throw new Error(
           'Error to sequence: ' + e)
 
-      )
     }
 
   }
