@@ -116,7 +116,7 @@ RCT_EXPORT_METHOD(ShowFor:(nonnull NSNumber *)view props:(NSDictionary *)props)
 
     MaterialShowcase *materialShowcase = [[MaterialShowcase alloc] init];
 UIView *target = [self.bridge.uiManager viewForReactTag: view];
-CGRect viewRect = target.frame;
+
 NSString *title = [props objectForKey: @"title"];
 NSString *description = [props objectForKey: @"description"];
 
@@ -164,6 +164,10 @@ if (targetRadiusValue >= 0) {
 }
 }
 
+if ([props objectForKey:@"cancelable"] != nil) {
+    BOOL *cancelable = [[props objectForKey:@"cancelable"] boolValue];
+[materialShowcase setIsTapRecognizerForTargetView: !cancelable];
+}
 
 // Text
 UIColor *titleTextColor;
@@ -240,8 +244,6 @@ if (aniRippleScaleValue > 0) {
 
 [materialShowcase setTargetViewWithView: target];
 [materialShowcase setDelegate: (id)self];
-
-
 
 return materialShowcase;
 }
