@@ -4,34 +4,42 @@ const { RNAppTour } = NativeModules
 
 class AppTour {
   static ShowSequence(sequence) {
-    let appTourTargets = sequence.getAll()
+    try{
+      let appTourTargets = sequence.getAll()
 
-    let viewIds = new Map(),
-        sortedViewIds = [],
-        props = {}
+      let viewIds = new Map(),
+          sortedViewIds = [],
+          props = {}
 
-    appTourTargets &&
-    appTourTargets.forEach((appTourTarget, key, appTourTargets) => {
-      if (
-          appTourTarget.props.order === undefined ||
-          appTourTarget.props.order === null
-      )
-        throw new Error(
-            'Each tour target should have a order mandatory props.'
+      appTourTargets &&
+      appTourTargets.forEach((appTourTarget, key, appTourTargets) => {
+        if (
+            appTourTarget.props.order === undefined ||
+            appTourTarget.props.order === null
         )
+          throw new Error(
+              'Each tour target should have a order mandatory props.'
+          )
 
-      viewIds.set(appTourTarget.props.order, appTourTarget.view)
-      props[appTourTarget.view] = appTourTarget.props
-    })
+        viewIds.set(appTourTarget.props.order, appTourTarget.view)
+        props[appTourTarget.view] = appTourTarget.props
+      })
 
-    let viewOrder = Array.from(viewIds.keys())
-    viewOrder = viewOrder.sort((a, b) => a - b)
+      let viewOrder = Array.from(viewIds.keys())
+      viewOrder = viewOrder.sort((a, b) => a - b)
 
-    viewOrder.forEach(vOrder => {
-      sortedViewIds.push(viewIds.get(vOrder))
-    })
+      viewOrder.forEach(vOrder => {
+        sortedViewIds.push(viewIds.get(vOrder))
+      })
 
-    RNAppTour.ShowSequence(sortedViewIds, props)
+      RNAppTour.ShowSequence(sortedViewIds, props)
+    }catch (e) {
+      throw new Error(
+          'Error to sequence: ' + e)
+
+      )
+    }
+
   }
 
   static ShowFor(appTourTarget) {
