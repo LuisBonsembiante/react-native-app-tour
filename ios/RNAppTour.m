@@ -164,10 +164,6 @@ if (targetRadiusValue >= 0) {
 }
 }
 
-if ([props objectForKey:@"cancelable"] != nil) {
-    BOOL *cancelable = [[props objectForKey:@"cancelable"] boolValue];
-[materialShowcase setIsTapRecognizerForTargetView: !cancelable];
-}
 
 // Text
 UIColor *titleTextColor;
