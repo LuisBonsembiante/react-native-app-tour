@@ -19,6 +19,6 @@
     "dependencies": {
     },
     "devDependencies": {
-        "prettier-pack": "0.0.2"
+        "prettier-pack": "0.0.8"
     }
 }
