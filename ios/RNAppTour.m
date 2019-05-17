@@ -283,10 +283,18 @@ return materialShowcase;
 
 NSArray *targetKeys = [targets allKeys];
 if (targetKeys.count <= 0) {
-    return;
+  return;
 }
 
 NSString *removeTargetKey = [targetKeys objectAtIndex: 0];
+
+// This for revert background color of target
+if (materialShowcase.targetHolderRadius <= 0.0f && targetOriginalColor != nil) {
+  NSNumber *view =  [NSNumber numberWithLongLong:[removeTargetKey longLongValue]];
+UIView *target = [self.bridge.uiManager viewForReactTag: view];
+[target setBackgroundColor: targetOriginalColor];
+}
+
 [targets removeObjectForKey: removeTargetKey];
 
 NSMutableArray *viewIds = [[NSMutableArray alloc] init];
@@ -327,6 +335,15 @@ if ([lowCaseString isEqualToString:@"left"]) {
 }
 
 return NSTextAlignmentLeft;
+}
+
+
+- (void) showCaseSkippedWithShowcase: (MaterialShowcase *)materialShowcase {
+  if (targets != nil) {
+    targets = MutableOrderedDictionary.new;
+  }
+  [self.bridge.eventDispatcher sendDeviceEventWithName:onCancelSequenceStepEvent body:@{@"cancel_step": @YES}];
+[materialShowcase completeShowcaseWithAnimated:true didTapTarget:false];
 }
 
 - (CGFloat) colorComponentFrom: (NSString *) string start: (NSUInteger) start length: (NSUInteger) length {
