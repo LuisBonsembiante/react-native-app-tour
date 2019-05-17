@@ -4,6 +4,7 @@
     NSString *const onStartShowStepEvent = @"onStartShowCaseEvent";
 NSString *const onShowSequenceStepEvent = @"onShowSequenceStepEvent";
 NSString *const onFinishShowStepEvent = @"onFinishSequenceEvent";
+NSString *const onCancelSequenceStepEvent = @"onCancelStepEvent";
 
     @implementation MutableOrderedDictionary {
 @protected
