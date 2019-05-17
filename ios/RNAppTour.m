@@ -230,6 +230,66 @@ if (aniRippleScaleValue > 0) {
 [materialShowcase setAniRippleScale:aniRippleScaleValue];
 }
 
+// Skip button
+if ([props objectForKey:@"isSkipButtonVisible"] != nil && targets != nil && targets.count > 0) {
+    bool *isSkipButtonVisible = [[props objectForKey:@"isSkipButtonVisible"] boolValue];
+[materialShowcase setIsSkipButtonVisible: isSkipButtonVisible];
+// Set skip button params
+UIColor *skipTextColor;
+NSString *skipTextValue = [props objectForKey:@"skipText"];
+NSString *skipTextColorValue = [props objectForKey:@"skipTextColor"];
+float skipTextSizeValue = [[props objectForKey:@"skipTextSize"] floatValue];
+UIColor *skipButtonBackgroundColor;
+NSString *skipButtonBackgroundColorValue = [props objectForKey:@"skipButtonBackgroundColor"];
+
+if (skipTextValue != nil) {
+[materialShowcase  setSkipText: skipTextValue];
+} if (skipTextColorValue != nil) {
+    skipTextColor = [self colorWithHexString:skipTextColorValue];
+} if (skipTextColor) {
+[materialShowcase setSkipTextColor: skipTextColor];
+} if (skipTextSizeValue > 0) {
+[materialShowcase setSkipTextSize: skipTextSizeValue];
+} if (skipButtonBackgroundColorValue != nil) {
+    skipButtonBackgroundColor = [self colorWithHexString: skipButtonBackgroundColorValue];
+} if (skipButtonBackgroundColor) {
+[materialShowcase setSkipButtonBackgroundColor: skipButtonBackgroundColor];
+}
+
+// skip button margin
+if ([props objectForKey:@"skipButtonMargin"] != nil) {
+    float marginValue = [[props objectForKey:@"skipButtonMargin"] floatValue];
+[materialShowcase setSkipButtonMarginLeft: marginValue];
+[materialShowcase setSkipButtonMarginTop: marginValue];
+[materialShowcase setSkipButtonMarginRight: marginValue];
+[materialShowcase setSkipButtonMarginBottom: marginValue];
+}
+
+if ([props objectForKey:@"skipButtonMarginLeft"] != nil) {
+    float skipButtonMarginLeftValue = [[props objectForKey:@"skipButtonMarginLeft"] floatValue];
+[materialShowcase setSkipButtonMarginLeft: skipButtonMarginLeftValue];
+} if ([props objectForKey:@"skipButtonMarginTop"] != nil) {
+    float skipButtonMarginTopValue = [[props objectForKey:@"skipButtonMarginTop"] floatValue];
+[materialShowcase setSkipButtonMarginTop: skipButtonMarginTopValue];
+} if ([props objectForKey:@"skipButtonMarginRight"] != nil) {
+    float skipButtonMarginRightValue = [[props objectForKey:@"skipButtonMarginRight"] floatValue];
+[materialShowcase setSkipButtonMarginRight: skipButtonMarginRightValue];
+} if ([props objectForKey:@"skipButtonMarginBottom"] != nil) {
+    float skipButtonMarginBottomValue = [[props objectForKey:@"skipButtonMarginBottom"] floatValue];
+[materialShowcase setSkipButtonMarginBottom: skipButtonMarginBottomValue];
+}
+
+if ([props objectForKey:@"skipButtonMarginHorizontal"] != nil) {
+    float skipButtonMarginHorizontalValue = [[props objectForKey:@"skipButtonMarginHorizontal"] floatValue];
+[materialShowcase setSkipButtonMarginLeft: skipButtonMarginHorizontalValue];
+[materialShowcase setSkipButtonMarginRight: skipButtonMarginHorizontalValue];
+} if ([props objectForKey:@"skipButtonMarginVertical"] != nil) {
+    float skipButtonMarginVerticalValue = [[props objectForKey:@"skipButtonMarginVertical"] floatValue];
+[materialShowcase setSkipButtonMarginTop: skipButtonMarginVerticalValue];
+[materialShowcase setSkipButtonMarginBottom: skipButtonMarginVerticalValue];
+}
+}
+
 
 // set rectangle target property
 if ([[props objectForKey:@"isRect"] boolValue]) {
